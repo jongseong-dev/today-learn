@@ -23,7 +23,7 @@ jobs:
     - name: Find changed Python files
       id: find_files
       run: |
-        git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '\.py$' > changed_files.txt
+        git diff --name-only origin/main | grep '\.py$' > changed_files.txt
 
     - name: Lint and Type Check
       run: |
