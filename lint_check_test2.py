@@ -1,4 +1,4 @@
-from .lint_check_test2 import solution as sl
+
 
 def solution(a:int, b: int) -> int:
     return a+b
