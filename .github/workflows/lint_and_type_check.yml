@@ -20,7 +20,11 @@ jobs:
         python -m pip install --upgrade pip
         pip install flake8 mypy
 
-    - name: Run flake8 and mypy on
+    - name: Find changed Python files
+      id: find_files
       run: |
-        git diff --name-only origin/main > changed_files.txt
-        xargs -a changed_files.txt -I {} sh -c 'if [ -f {} ]; then flake8 {} && mypy {}; fi'
+        git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '\.py$' > changed_files.txt
+
+    - name: Lint and Type Check
+      run: |
+        cat changed_files.txt | xargs -I {} sh -c 'flake8 {} && mypy {}'
