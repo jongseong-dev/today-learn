@@ -29,4 +29,4 @@ jobs:
       - name: Lint and type check
         run: |
           find . -name "*.py" -exec flake8 {} +
-#          find . -name "*.py" -exec mypy --ignore-missing-imports {} +
+          find . -name "*.py" -exec mypy --ignore-missing-imports {} +
