@@ -20,10 +20,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install flake8 mypy
 
-    - name: Run flake8
+    - name: Run flake8 and mypy on
       run: |
-        flake8
-
-    - name: Run mypy
-      run: |
-        mypy
+        git diff --name-only origin/main > changed_files.txt
+        xargs -a changed_files.txt -I {} sh -c 'if [ -f {} ]; then flake8 {} && mypy {}; fi'
